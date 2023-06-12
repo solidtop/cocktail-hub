@@ -17,21 +17,6 @@ const CocktailCard: FC<CocktailCardProps> = ({
   onBookmarkChange,
   showBookmark,
 }) => {
-  const handleBookmark = async () => {
-    const res = await fetch("/api/saved-cocktails", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(cocktail.idDrink),
-    });
-
-    const payload = await res.json();
-    if (payload.success) {
-      onBookmarkChange(cocktail.idDrink);
-    }
-  };
-
   return (
     <li className="relative bg-container-color rounded">
       <Link
@@ -50,7 +35,7 @@ const CocktailCard: FC<CocktailCardProps> = ({
         {showBookmark && (
           <ButtonBookmark
             isBookmarked={isBookmarked}
-            onClick={() => handleBookmark()}
+            onClick={() => onBookmarkChange(cocktail.idDrink)}
           />
         )}
       </div>

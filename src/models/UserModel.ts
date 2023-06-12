@@ -4,7 +4,7 @@ interface IUserModelSchema {
   name: string;
   email: string;
   passwordHash: string;
-  savedCocktailIds: number[];
+  savedCocktailIds: string[];
 }
 
 const UserModelSchema = new mongoose.Schema<IUserModelSchema>({

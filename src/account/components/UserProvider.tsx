@@ -34,14 +34,13 @@ const UserProvider: FC<UserProviderProps> = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const router = useRouter();
 
-  if (!user) {
+  if (!user && !loading) {
     router.push("/");
   }
 
   useEffect(() => {
     const getUser = async () => {
       try {
-        console.log("user fetched");
         const res = await fetch("/api/auth/user");
         const user = await res.json();
         setUser(user);
@@ -80,7 +79,7 @@ const UserProvider: FC<UserProviderProps> = ({ children }) => {
   };
 
   const logout = async () => {
-    const res = await fetch("/api/auth/logout", {
+    await fetch("/api/auth/logout", {
       method: "POST",
     });
 

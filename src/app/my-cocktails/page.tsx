@@ -1,5 +1,9 @@
-import Content from "./content";
+import UserCocktailList from "@/components/UserCocktailList";
 
 export default async function MyCocktailsPage() {
-  return <Content />;
+  return (
+    <main>
+      <UserCocktailList />
+    </main>
+  );
 }

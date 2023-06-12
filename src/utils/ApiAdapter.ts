@@ -47,7 +47,7 @@ class ApiAdapter {
     return payload.drinks;
   }
 
-  async getCocktailsByIds(ids: number[]): Promise<Cocktail[]> {
+  async getCocktailsByIds(ids: string[]): Promise<Cocktail[]> {
     const promises = ids.map((id) =>
       fetch(`${this.API_URL}/lookup.php?i=${id}`)
     );

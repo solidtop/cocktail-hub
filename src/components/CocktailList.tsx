@@ -19,20 +19,47 @@ const CocktailList: FC<CocktailListProps> = ({ cocktails }) => {
       const res = await fetch("/api/saved-cocktails?onlyIds=true");
       const payload = await res.json();
       if (payload) {
-        setBookmarkIds(payload);
+        setBookmarkIds(payload as string[]);
       }
     };
 
     getBookmarkIds();
   }, []);
 
-  const handleBookmarkChange = (id: string) => {
+  const postToApi = async (id: string) => {
+    const res = await fetch("/api/saved-cocktails", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(id),
+    });
+
+    const payload = await res.json();
+    return payload;
+  };
+
+  const deleteToApi = async (id: string) => {
+    const res = await fetch(`/api/saved-cocktails/${id}`, {
+      method: "DELETE",
+    });
+    const payload = await res.json();
+    return payload;
+  };
+
+  const handleBookmarkChange = async (id: string) => {
     const bookmarkExists = bookmarkIds.includes(id);
-    let updatedBookmarks: string[];
+    let updatedBookmarks: string[] = [];
     if (bookmarkExists) {
-      updatedBookmarks = bookmarkIds.filter((bookmark) => bookmark !== id);
+      const payload = await deleteToApi(id);
+      if (payload.success) {
+        updatedBookmarks = bookmarkIds.filter((bookmark) => bookmark !== id);
+      }
     } else {
-      updatedBookmarks = [...bookmarkIds, id];
+      const payload = await postToApi(id);
+      if (payload.success) {
+        updatedBookmarks = [...bookmarkIds, id];
+      }
     }
     setBookmarkIds(updatedBookmarks);
   };

@@ -1,3 +1,6 @@
+"use client";
+
+import useUser from "@/account/hooks/useUser";
 import { FC } from "react";
 
 type ButtonBookmarkProps = {
@@ -6,6 +9,12 @@ type ButtonBookmarkProps = {
 };
 
 const ButtonBookmark: FC<ButtonBookmarkProps> = ({ isBookmarked, onClick }) => {
+  const { loading } = useUser();
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
   return (
     <button onClick={onClick} className="z-20">
       <svg
