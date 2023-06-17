@@ -26,9 +26,9 @@ const CocktailCard: FC<CocktailCardProps> = ({
       <Image
         src={cocktail.strDrinkThumb}
         alt="cocktail image"
-        width={200}
-        height={200}
-        className="w-full rounded"
+        width={500}
+        height={500}
+        className="w-80 rounded"
       ></Image>
       <div className="flex justify-between items-center p-2">
         <h4>{cocktail.strDrink}</h4>

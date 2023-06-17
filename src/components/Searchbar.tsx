@@ -21,13 +21,20 @@ const Searchbar: FC = () => {
         ev.preventDefault();
         handleSearch();
       }}
-      className="flex justify-center gap-4"
+      className="flex justify-center gap-4 md:w-1/2 mx-auto relative"
     >
+      <svg
+        height="1em"
+        viewBox="0 0 512 512"
+        className="absolute top-3 left-4 fill-white"
+      >
+        <path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" />
+      </svg>
       <label htmlFor="search" className="hidden">
         Search for cocktails
       </label>
       <input
-        className="text-black w-full md:w-1/2 px-4 py-2 rounded"
+        className="text-white w-full pl-12 pr-4 py-2 rounded-full bg-backdrop-color"
         type="search"
         name="cocktail-search"
         id="search"

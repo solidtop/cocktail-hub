@@ -1,7 +1,21 @@
 import { Category, Cocktail, Ingredient } from "@/types/cocktail";
 
 class ApiAdapter {
-  private API_URL: string = "https://thecocktaildb.com/api/json/v1/1";
+  private API_URL: string = `https://thecocktaildb.com/api/json/v2/${
+    process.env.API_KEY as string
+  }`;
+
+  async getLatestCocktails() {
+    const res = await fetch(`${this.API_URL}/latest.php`);
+    const payload = await res.json();
+    return payload.drinks;
+  }
+
+  async getPopularCocktails() {
+    const res = await fetch(`${this.API_URL}/popular.php`);
+    const payload = await res.json();
+    return payload.drinks;
+  }
 
   async getCocktail(id: string): Promise<Cocktail> {
     const res = await fetch(`${this.API_URL}/lookup.php?i=${id}`);
@@ -21,12 +35,14 @@ class ApiAdapter {
     return payload.drinks;
   }
 
-  async getCocktailsByIngredient(ingredient: string): Promise<Cocktail[]> {
+  async getCocktailsByIngredient(
+    ingredient: string
+  ): Promise<Cocktail[] | null> {
     const res = await fetch(
       `${this.API_URL}/filter.php?i=${ingredient.replace(/\s/g, "_")}`
     );
     const payload = await res.json();
-    return payload.drinks;
+    return payload.drinks === "None Found" ? null : payload.drinks;
   }
 
   async getIngredientByName(name: string): Promise<Ingredient> {
@@ -37,6 +53,14 @@ class ApiAdapter {
 
   async getIngredients(): Promise<Ingredient[]> {
     const res = await fetch(`${this.API_URL}/list.php?i=list`);
+    const payload = await res.json();
+    return payload.drinks;
+  }
+
+  async getCocktailsByCategory(category: string): Promise<Cocktail[]> {
+    const res = await fetch(
+      `${this.API_URL}/filter.php?c=${category.replace(/\s/g, "_")}`
+    );
     const payload = await res.json();
     return payload.drinks;
   }
@@ -54,6 +78,12 @@ class ApiAdapter {
     const responses = await Promise.all(promises);
     const payload = await Promise.all(responses.map((res) => res.json()));
     return payload.map((item) => item.drinks).flat();
+  }
+
+  async getRandomCocktail() {
+    const res = await fetch(`${this.API_URL}/random.php`);
+    const payload = await res.json();
+    return payload.drinks;
   }
 }
 

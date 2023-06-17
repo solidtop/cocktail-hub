@@ -49,8 +49,10 @@ const DropdownMenu: FC<DropdownMenuProps> = ({
   }, []);
 
   const menuStyling = `${
-    responsive ? "mx-4 md:absolute md:mx-0" : "absolute"
-  } top-full mt-2 z-10 rounded bg-backdrop-color max-h-96 overflow-scroll shadow-xl`;
+    responsive
+      ? "mx-4 md:absolute md:mx-0 animate-dropdown-reveal md:animate-none"
+      : "absolute"
+  } top-full mt-2 z-50 rounded bg-backdrop-color max-h-96 overflow-scroll shadow-xl`;
   const itemStyling = `${
     responsive ? "text-center md:text-left" : "text-left"
   } relative whitespace-nowrap hover:bg-hover-color rounded`;

@@ -1,5 +1,6 @@
+import ButtonBookmark from "@/components/ButtonBookmark";
 import IngredientList from "@/components/IngredientList";
-import { Cocktail, Ingredient } from "@/types/cocktail";
+import { Cocktail } from "@/types/cocktail";
 import ApiAdapter from "@/utils/ApiAdapter";
 import Image from "next/image";
 
@@ -9,14 +10,24 @@ type CocktailProps = {
   };
 };
 
+type Ingredient = {
+  ingredient: string;
+  measure: string;
+};
+
 function getIngredients(cocktail: Cocktail) {
-  const ingredients = [];
+  const ingredients: Ingredient[] = [];
   for (let i = 1; i <= 15; i++) {
     const ingredientKey = `strIngredient${i}`;
-    const ingredient = cocktail[ingredientKey];
+    const ingredient = cocktail[ingredientKey as keyof Cocktail];
     const measureKey = `strMeasure${i}`;
-    const measure = cocktail[measureKey];
-    if (ingredient) {
+    const measure = cocktail[measureKey as keyof Cocktail];
+
+    if (
+      ingredient &&
+      typeof ingredient === "string" &&
+      typeof measure === "string"
+    ) {
       ingredients.push({ ingredient, measure });
     }
   }
@@ -35,23 +46,32 @@ export default async function CocktailPage({ params }: CocktailProps) {
   const ingredients = getIngredients(cocktail);
 
   return (
-    <main className="max-w-screen-xl mx-auto">
-      <h2 className="text-2xl text-center">{cocktail.strDrink}</h2>
-      <Image
-        src={cocktail.strDrinkThumb}
-        alt="Cocktail image"
-        width={200}
-        height={200}
-        className="w-auto mx-auto"
-      />
+    <main className="max-w-screen-md mx-auto my-10">
+      <h2 className="text-2xl text-left">{cocktail.strDrink}</h2>
+      <div className="h-[2px] bg-white bg-opacity-50 rounded"></div>
+
+      <div className="flex">
+        <Image
+          src={cocktail.strDrinkThumb}
+          alt="Cocktail image"
+          width={1000}
+          height={1000}
+          className="max-w-lg w-full h-auto mx-auto rounded mt-4 mb-8"
+        />
+      </div>
 
       <section>
+        <h3 className="text-2xl text-center py-1 bg-container-color rounded">
+          Ingredients
+        </h3>
         <IngredientList ingredients={ingredients} />
       </section>
 
       <section>
-        <h3>Instructions</h3>
-        <p>{cocktail.strInstructions}</p>
+        <h3 className="text-2xl text-center py-1 bg-container-color rounded">
+          Instructions
+        </h3>
+        <p className="p-4">{cocktail.strInstructions}</p>
       </section>
     </main>
   );

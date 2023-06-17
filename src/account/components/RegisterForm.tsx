@@ -60,7 +60,7 @@ const RegisterForm: FC<RegisterFormProps> = ({ onRegisterComplete }) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col gap-6 max-w-sm mx-auto p-4 bg-container-color rounded"
+      className="max-w-sm mx-auto p-4 bg-container-color rounded"
     >
       <InputField
         type="text"
@@ -98,7 +98,9 @@ const RegisterForm: FC<RegisterFormProps> = ({ onRegisterComplete }) => {
         setValue={setConfirmPassword}
         errorMessage={errors?.confirmPassword?._errors[0] || ""}
       />
-      <ButtonPrimary type="submit">Sign up</ButtonPrimary>
+      <div className="mt-4">
+        <ButtonPrimary type="submit">Sign up</ButtonPrimary>
+      </div>
     </form>
   );
 };

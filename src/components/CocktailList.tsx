@@ -69,7 +69,7 @@ const CocktailList: FC<CocktailListProps> = ({ cocktails }) => {
   };
 
   return (
-    <ul className="grid sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 justify-items-center my-20">
+    <ul className="grid sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 justify-items-center my-4">
       {cocktails.map((cocktail, index) => (
         <CocktailCard
           key={index}

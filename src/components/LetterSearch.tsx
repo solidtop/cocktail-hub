@@ -6,7 +6,7 @@ const LetterSearch: FC = () => {
   const letters = charCodes.map((x) => String.fromCharCode(x));
 
   return (
-    <nav className="grid grid-cols-10 xl:flex justify-items-center items-center gap-2 mx-auto">
+    <nav className="grid grid-cols-9 xl:flex justify-items-center items-center gap-2 mx-auto mt-20">
       {letters.map((letter) => (
         <Link
           href={{ pathname: "/cocktails", search: `letter=${letter}` }}

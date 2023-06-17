@@ -1,5 +1,5 @@
 import "./globals.css";
-import { Inter } from "next/font/google";
+import { Poppins } from "next/font/google";
 import Header from "@/components/Header";
 import Searchbar from "@/components/Searchbar";
 import LetterSearch from "@/components/LetterSearch";
@@ -8,7 +8,7 @@ import ApiAdapter from "@/utils/ApiAdapter";
 import UserProvider from "@/account/components/UserProvider";
 import Link from "next/link";
 
-const inter = Inter({ subsets: ["latin"] });
+const poppins = Poppins({ weight: ["400", "700"], subsets: ["latin"] });
 
 export const metadata = {
   title: "Cocktail hub",
@@ -44,7 +44,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <body className={inter.className + " max-w-screen-2xl mx-auto p-4"}>
+      <body className={poppins.className + " max-w-screen-2xl mx-auto p-4"}>
         <UserProvider>
           <Header />
           <Searchbar />

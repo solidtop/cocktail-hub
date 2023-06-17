@@ -21,11 +21,11 @@ module.exports = {
       keyframes: {
         rollDown: {
           '0%': { height: '0' },
-          '100%': { height: '500px' },
+          '100%': { height: '384px' },
         }
       },
       animation: {
-        'dropdown-reveal': 'rollDown .2s linear',
+        'dropdown-reveal': 'rollDown .2s ease-out',
       }
     },
   },

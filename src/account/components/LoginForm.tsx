@@ -47,7 +47,7 @@ const LoginForm: FC<LoginFormProps> = ({ onLoginComplete }) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col gap-6 max-w-sm mx-auto p-4 bg-container-color rounded"
+      className="max-w-sm mx-auto p-4 bg-container-color rounded"
       id="login-form"
     >
       <InputField
@@ -71,7 +71,10 @@ const LoginForm: FC<LoginFormProps> = ({ onLoginComplete }) => {
       <label htmlFor="login-form" className="text-red-500">
         {errorMessage}
       </label>
-      <ButtonPrimary type="submit">Log in</ButtonPrimary>
+
+      <div className="my-4">
+        <ButtonPrimary type="submit">Log in</ButtonPrimary>
+      </div>
     </form>
   );
 };

@@ -3,6 +3,7 @@
 import { FC, useEffect, useState } from "react";
 import { Cocktail } from "@/types/cocktail";
 import UserCocktailCard from "./UserCocktailCard";
+import NoResultsMessage from "./NoResultsMessage";
 
 type UserCocktailListProps = {
   cocktails: Cocktail[];
@@ -57,7 +58,7 @@ const UserCocktailList: FC = () => {
   }
 
   if (cocktails.length === 0) {
-    return <p>You have no saved cocktails</p>;
+    return <NoResultsMessage>You have no saved cocktails</NoResultsMessage>;
   }
 
   return (
