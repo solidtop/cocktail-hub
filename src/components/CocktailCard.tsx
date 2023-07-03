@@ -7,15 +7,15 @@ import ButtonBookmark from "./ButtonBookmark";
 type CocktailCardProps = {
   cocktail: Cocktail;
   isBookmarked: boolean;
-  onBookmarkChange: (id: string) => void;
   showBookmark: boolean;
+  onBookmark: (isChecked: boolean) => void;
 };
 
 const CocktailCard: FC<CocktailCardProps> = ({
   cocktail,
   isBookmarked,
-  onBookmarkChange,
   showBookmark,
+  onBookmark,
 }) => {
   return (
     <li className="relative bg-container-color rounded">
@@ -35,7 +35,8 @@ const CocktailCard: FC<CocktailCardProps> = ({
         {showBookmark && (
           <ButtonBookmark
             isBookmarked={isBookmarked}
-            onClick={() => onBookmarkChange(cocktail.idDrink)}
+            cocktailId={cocktail.idDrink}
+            onBookmark={onBookmark}
           />
         )}
       </div>

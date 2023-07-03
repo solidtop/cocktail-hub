@@ -4,6 +4,7 @@ import { FC, useEffect, useState } from "react";
 import { Cocktail } from "@/types/cocktail";
 import UserCocktailCard from "./UserCocktailCard";
 import NoResultsMessage from "./NoResultsMessage";
+import BookmarkHandler from "@/utils/BookmarkHandler";
 
 type UserCocktailListProps = {
   cocktails: Cocktail[];
@@ -33,12 +34,10 @@ const UserCocktailList: FC = () => {
   }, []);
 
   const handleRemove = async (cocktailId: string) => {
-    try {
-      const res = await fetch(`/api/saved-cocktails/${cocktailId}`, {
-        method: "DELETE",
-      });
+    const bh = new BookmarkHandler();
 
-      const payload = await res.json();
+    try {
+      const payload = await bh.delete(cocktailId);
       if (payload.success) {
         setCocktails((prevCocktails) =>
           prevCocktails
