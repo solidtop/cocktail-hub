@@ -7,7 +7,7 @@ import ButtonBookmark from "./ButtonBookmark";
 type CocktailCardProps = {
   cocktail: Cocktail;
   isBookmarked: boolean;
-  showBookmark: boolean;
+  showBookmark?: boolean;
   onBookmark: (isChecked: boolean) => void;
 };
 

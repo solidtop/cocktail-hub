@@ -1,5 +1,4 @@
-import ButtonBookmark from "@/components/ButtonBookmark";
-import BookmarkHandler from "@/utils/BookmarkHandler";
+import BookmarkWrapper from "@/components/BookmarkWrapper";
 import IngredientList from "@/components/IngredientList";
 import { Cocktail } from "@/types/cocktail";
 import ApiAdapter from "@/utils/ApiAdapter";
@@ -60,9 +59,7 @@ export default async function CocktailPage({ params }: CocktailProps) {
           className="w-full h-auto rounded"
         />
 
-        <div className="absolute top-4 right-4">
-          <ButtonBookmark cocktailId={cocktail.idDrink} />
-        </div>
+        <BookmarkWrapper cocktailId={cocktail.idDrink} />
       </div>
 
       <section>

@@ -2,12 +2,12 @@
 
 import useUser from "@/account/hooks/useUser";
 import BookmarkHandler from "@/utils/BookmarkHandler";
-import { Dispatch, FC, SetStateAction, useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 
 type ButtonBookmarkProps = {
   cocktailId: string;
-  isBookmarked?: boolean;
-  onBookmark?: (isChecked: boolean) => void;
+  isBookmarked: boolean;
+  onBookmark: (isChecked: boolean) => void;
 };
 
 const ButtonBookmark: FC<ButtonBookmarkProps> = ({
@@ -19,44 +19,30 @@ const ButtonBookmark: FC<ButtonBookmarkProps> = ({
   const [isChecked, setIsChecked] = useState(false);
   const bh = new BookmarkHandler();
 
-  if (isBookmarked !== undefined) {
-    useEffect(() => {
-      setIsChecked(isBookmarked);
-    }, [isBookmarked]);
-  } else {
-    useEffect(() => {
-      const loadBookmarkId = async () => {
-        const payload = await bh.load(cocktailId);
-        setIsChecked(payload ? true : false);
-      };
-
-      loadBookmarkId();
-    }, []);
-  }
+  useEffect(() => {
+    setIsChecked(isBookmarked);
+  }, [isBookmarked]);
 
   if (loading) {
     return <p>Loading...</p>;
   }
 
-  const handleClick = async () => {
+  const handleClick = () => {
     if (isChecked) {
-      await bh.delete(cocktailId);
-      setIsChecked(false);
+      bh.delete(cocktailId);
     } else {
-      await bh.save(cocktailId);
-      setIsChecked(true);
+      bh.save(cocktailId);
     }
 
-    if (onBookmark) {
-      onBookmark(isChecked);
-    }
+    setIsChecked((prevState) => !prevState);
+    onBookmark(!isChecked);
   };
 
   return (
     <button
       onClick={handleClick}
       className={`z-10 p-2 max-h-10 ${
-        isChecked ? "bg-green-600 bg-opacity-20" : "bg-backdrop-color"
+        isChecked ? "bg-green-900" : "bg-backdrop-color"
       } rounded`}
     >
       <svg
