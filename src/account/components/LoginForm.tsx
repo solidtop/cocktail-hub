@@ -22,6 +22,7 @@ const LoginForm: FC<LoginFormProps> = ({ onLoginComplete }) => {
     null
   );
   const [errorMessage, setErrorMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     setErrorMessage("");
@@ -35,6 +36,7 @@ const LoginForm: FC<LoginFormProps> = ({ onLoginComplete }) => {
       return;
     }
 
+    setIsLoading(true);
     const payload = await login(email, password);
     if (payload._errors) {
       setErrors(payload);
@@ -45,9 +47,10 @@ const LoginForm: FC<LoginFormProps> = ({ onLoginComplete }) => {
     }
 
     onLoginComplete();
+    setIsLoading(false);
   };
 
-  if (loading) {
+  if (loading || isLoading) {
     return <Spinner />;
   }
 

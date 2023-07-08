@@ -28,6 +28,7 @@ const RegisterForm: FC<RegisterFormProps> = ({ onRegisterComplete }) => {
   const [errors, setErrors] = useState<ZodFormattedError<FormData> | null>(
     null
   );
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     setErrors(null);
@@ -50,6 +51,7 @@ const RegisterForm: FC<RegisterFormProps> = ({ onRegisterComplete }) => {
       return;
     }
 
+    setIsLoading(true);
     const payload = await register(name, email, password, confirmPassword);
     if (payload._errors) {
       setErrors(payload);
@@ -57,9 +59,10 @@ const RegisterForm: FC<RegisterFormProps> = ({ onRegisterComplete }) => {
     }
 
     onRegisterComplete();
+    setIsLoading(false);
   };
 
-  if (loading) {
+  if (loading || isLoading) {
     return <Spinner />;
   }
 
