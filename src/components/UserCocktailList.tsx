@@ -5,6 +5,7 @@ import { Cocktail } from "@/types/cocktail";
 import UserCocktailCard from "./UserCocktailCard";
 import NoResultsMessage from "./NoResultsMessage";
 import BookmarkHandler from "@/utils/BookmarkHandler";
+import Spinner from "./Spinner";
 
 type UserCocktailListProps = {
   cocktails: Cocktail[];
@@ -53,7 +54,7 @@ const UserCocktailList: FC = () => {
   };
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <Spinner />;
   }
 
   if (cocktails.length === 0) {

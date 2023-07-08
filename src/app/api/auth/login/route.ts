@@ -20,7 +20,10 @@ export async function POST(request: NextRequest) {
   const { email, password } = result.data;
   const user = await UserModel.findOne({ email });
   if (!user) {
-    return NextResponse.json({ error: "Cannot find user" }, { status: 401 });
+    return NextResponse.json(
+      { error: "Incorrect email or password" },
+      { status: 401 }
+    );
   }
 
   const isCorrectPassword = await bcrypt.compare(password, user.passwordHash);

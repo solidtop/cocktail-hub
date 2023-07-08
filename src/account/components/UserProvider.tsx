@@ -2,7 +2,7 @@
 
 import { FC, ReactNode, createContext, useEffect, useState } from "react";
 import { User } from "../types";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 
 type UserState = {
   user: User | null;
@@ -32,11 +32,6 @@ type UserProviderProps = {
 const UserProvider: FC<UserProviderProps> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
-  const router = useRouter();
-
-  if (!user && !loading) {
-    router.push("/");
-  }
 
   useEffect(() => {
     const getUser = async () => {
@@ -115,6 +110,15 @@ const UserProvider: FC<UserProviderProps> = ({ children }) => {
       return null;
     }
   };
+
+  const pathname = usePathname();
+  const router = useRouter();
+
+  if (pathname === "/my-cocktails" && !user && !loading) {
+    setTimeout(() => {
+      router.push("/");
+    }, 100);
+  }
 
   return (
     <UserContext.Provider

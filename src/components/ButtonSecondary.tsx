@@ -1,13 +1,13 @@
 import { FC } from "react";
 
 type ButtonSecondaryProps = {
-  type: "button" | "submit" | "reset";
+  type?: "button" | "submit" | "reset";
   onClick?: () => void;
-  children: string;
+  children?: string;
 };
 
 const ButtonSecondary: FC<ButtonSecondaryProps> = ({
-  type,
+  type = "button",
   onClick,
   children,
 }) => {
@@ -15,7 +15,7 @@ const ButtonSecondary: FC<ButtonSecondaryProps> = ({
     <button
       type={type}
       onClick={onClick}
-      className="px-4 py-2 bg-red-600 rounded"
+      className="px-4 py-2 bg-gray-700 rounded"
     >
       {children}
     </button>

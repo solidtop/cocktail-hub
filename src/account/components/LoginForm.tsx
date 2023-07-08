@@ -3,6 +3,7 @@ import InputField from "../../components/InputField";
 import ButtonPrimary from "../../components/ButtonPrimary";
 import { ZodFormattedError } from "zod";
 import useUser from "../hooks/useUser";
+import Spinner from "@/components/Spinner";
 
 type FormData = {
   email: string;
@@ -14,7 +15,7 @@ type LoginFormProps = {
 };
 
 const LoginForm: FC<LoginFormProps> = ({ onLoginComplete }) => {
-  const { login } = useUser();
+  const { login, loading } = useUser();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState<ZodFormattedError<FormData> | null>(
@@ -37,12 +38,18 @@ const LoginForm: FC<LoginFormProps> = ({ onLoginComplete }) => {
     const payload = await login(email, password);
     if (payload._errors) {
       setErrors(payload);
+      return;
     } else if (payload.error) {
       setErrorMessage(payload.error);
+      return;
     }
 
     onLoginComplete();
   };
+
+  if (loading) {
+    return <Spinner />;
+  }
 
   return (
     <form

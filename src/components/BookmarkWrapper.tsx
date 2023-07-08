@@ -14,10 +14,6 @@ const BookmarkWrapper: FC<BookmarkWrapperProps> = ({ cocktailId }) => {
   const [isBookmarked, setIsBookmarked] = useState(false);
   const bh = new BookmarkHandler();
 
-  if (!user) {
-    return null;
-  }
-
   useEffect(() => {
     const loadBookmarkId = async () => {
       const payload = await bh.load(cocktailId);
@@ -26,6 +22,10 @@ const BookmarkWrapper: FC<BookmarkWrapperProps> = ({ cocktailId }) => {
 
     loadBookmarkId();
   }, []);
+
+  if (!user) {
+    return null;
+  }
 
   return (
     <div className="absolute top-4 right-4">
