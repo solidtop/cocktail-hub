@@ -10,8 +10,8 @@ type IngredientListProps = {
 const IngredientList: FC<IngredientListProps> = ({ ingredients }) => {
   return (
     <ul className="list-disc list-inside p-4">
-      {ingredients.map((ingredient) => (
-        <li>
+      {ingredients.map((ingredient, index) => (
+        <li key={index}>
           {ingredient.measure ? `${ingredient.measure} ` : ""}
           {ingredient.ingredient}{" "}
         </li>
