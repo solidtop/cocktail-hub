@@ -21,7 +21,7 @@ const BookmarkWrapper: FC<BookmarkWrapperProps> = ({ cocktailId }) => {
     };
 
     loadBookmarkId(cocktailId);
-  }, []);
+  }, [cocktailId]);
 
   if (!user) {
     return null;
