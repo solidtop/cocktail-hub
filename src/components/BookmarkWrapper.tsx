@@ -12,15 +12,15 @@ type BookmarkWrapperProps = {
 const BookmarkWrapper: FC<BookmarkWrapperProps> = ({ cocktailId }) => {
   const { user } = useUser();
   const [isBookmarked, setIsBookmarked] = useState(false);
-  const bh = new BookmarkHandler();
 
   useEffect(() => {
-    const loadBookmarkId = async () => {
-      const payload = await bh.load(cocktailId);
+    const loadBookmarkId = async (id: string) => {
+      const bh = new BookmarkHandler();
+      const payload = await bh.load(id);
       setIsBookmarked(payload ? true : false);
     };
 
-    loadBookmarkId();
+    loadBookmarkId(cocktailId);
   }, []);
 
   if (!user) {

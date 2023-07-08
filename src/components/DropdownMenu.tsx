@@ -8,7 +8,6 @@ import {
   Children,
   cloneElement,
   ReactElement,
-  useCallback,
 } from "react";
 
 type ReactElementProps = {
@@ -31,14 +30,14 @@ const DropdownMenu: FC<DropdownMenuProps> = ({
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const handleClickOutside = useCallback((ev: MouseEvent) => {
+  const handleClickOutside = (ev: MouseEvent) => {
     if (
       dropdownRef.current &&
       !dropdownRef.current.contains(ev.target as Node)
     ) {
       setIsOpen(false);
     }
-  }, []);
+  };
 
   useEffect(() => {
     document.addEventListener("click", handleClickOutside);

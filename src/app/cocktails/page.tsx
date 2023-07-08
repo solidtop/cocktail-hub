@@ -52,7 +52,7 @@ export default async function CocktailsPage({ searchParams }: ResultsProps) {
 
   return (
     <main>
-      <h2 className="text-lg">Results for "{term}"</h2>
+      <h2 className="text-lg">Results for &quot;{term}&quot;</h2>
 
       <CocktailList cocktails={results} />
     </main>

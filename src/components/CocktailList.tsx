@@ -14,16 +14,18 @@ const CocktailList: FC<CocktailListProps> = ({ cocktails }) => {
   const { user } = useUser();
   const [bookmarkIds, setBookmarkIds] = useState<string[]>([]);
   const showBookmarks = user ? true : false;
-  const bh = new BookmarkHandler();
 
   useEffect(() => {
     const loadBookmarkIds = async () => {
+      const bh = new BookmarkHandler();
       const payload = await bh.loadAll();
       setBookmarkIds(payload);
     };
 
     loadBookmarkIds();
   }, []);
+
+  const bh = new BookmarkHandler();
 
   return (
     <ul className="grid sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 justify-items-center my-4">
