@@ -5,12 +5,13 @@ import Link from "next/link";
 import useUser from "../account/hooks/useUser";
 import DropdownMenu from "./DropdownMenu";
 import ButtonPrimary from "./ButtonPrimary";
+import Spinner from "./Spinner";
 
 const ProfilePanel: FC = () => {
   const { loading, user, logout } = useUser();
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <Spinner size="w-8 h-8" />;
   }
 
   if (user) {

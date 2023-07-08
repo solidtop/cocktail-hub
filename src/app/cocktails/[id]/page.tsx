@@ -50,7 +50,7 @@ export default async function CocktailPage({ params }: CocktailProps) {
       <h2 className="text-2xl text-left">{cocktail.strDrink}</h2>
       <div className="h-[2px] bg-white bg-opacity-50 rounded"></div>
 
-      <div className="max-w-lg flex mt-4 mb-8 mx-auto relative">
+      <div className="max-w-lg flex mt-4 mb-8 mx-auto relative bg-white bg-opacity-10 rounded">
         <Image
           src={cocktail.strDrinkThumb}
           alt="Cocktail image"

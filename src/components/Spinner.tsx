@@ -1,11 +1,17 @@
 import { FC } from "react";
 
-const Spinner: FC = () => {
+type SpinnerProps = {
+  size?: string;
+};
+
+const Spinner: FC<SpinnerProps> = ({ size }) => {
   return (
     <div role="status" className="flex justify-center items-center my-10">
       <svg
         aria-hidden="true"
-        className="w-20 h-20 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-primary-color"
+        className={`${
+          size ? size : "w-20 h-20"
+        } mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-primary-color`}
         viewBox="0 0 100 101"
         fill="none"
       >
