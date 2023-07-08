@@ -1,17 +1,21 @@
 import { FC } from "react";
 
 type ButtonPrimaryProps = {
-  type: "button" | "submit" | "reset";
+  type?: "button" | "submit" | "reset";
   onClick?: () => void;
-  children: string;
+  children?: string;
 };
 
-const ButtonPrimary: FC<ButtonPrimaryProps> = ({ type, onClick, children }) => {
+const ButtonPrimary: FC<ButtonPrimaryProps> = ({
+  type = "button",
+  onClick,
+  children,
+}) => {
   return (
     <button
       type={type}
       onClick={onClick}
-      className="px-4 py-2 bg-gray-700 rounded"
+      className="px-4 py-2 bg-primary-color rounded"
     >
       {children}
     </button>

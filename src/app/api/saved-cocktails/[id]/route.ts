@@ -9,6 +9,12 @@ type RouteProps = {
   };
 };
 
+export async function GET(req: NextRequest, { params }: RouteProps) {
+  const cocktailId = params.id;
+  const user = await UserModel.findOne({ savedCocktailIds: cocktailId });
+  return NextResponse.json(user ? params.id : null);
+}
+
 export async function DELETE(req: NextRequest, { params }: RouteProps) {
   const tokenCookie = req.cookies.get("token");
   if (!tokenCookie) {

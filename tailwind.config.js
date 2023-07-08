@@ -12,6 +12,7 @@ module.exports = {
         'backdrop-color': '#2C3639',
         'border-color': 'rgba(255, 255, 255, .1)',
         'hover-color': 'rgba(255, 255, 255, .2)',
+        'primary-color': '#24c4bc',
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

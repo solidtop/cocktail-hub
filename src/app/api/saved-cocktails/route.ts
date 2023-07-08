@@ -7,7 +7,7 @@ import ApiAdapter from "@/utils/ApiAdapter";
 export async function GET(req: NextRequest) {
   const tokenCookie = req.cookies.get("token");
   if (!tokenCookie) {
-    return NextResponse.json(null, { status: 401 });
+    return NextResponse.json(null);
   }
 
   try {

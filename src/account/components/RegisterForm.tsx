@@ -6,6 +6,7 @@ import ButtonPrimary from "../../components/ButtonPrimary";
 import { ZodFormattedError } from "zod";
 import { getRegisterSchema } from "@/utils/validation";
 import useUser from "../hooks/useUser";
+import Spinner from "@/components/Spinner";
 
 export type FormData = {
   name: string;
@@ -19,7 +20,7 @@ type RegisterFormProps = {
 };
 
 const RegisterForm: FC<RegisterFormProps> = ({ onRegisterComplete }) => {
-  const { register } = useUser();
+  const { register, loading } = useUser();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -52,10 +53,15 @@ const RegisterForm: FC<RegisterFormProps> = ({ onRegisterComplete }) => {
     const payload = await register(name, email, password, confirmPassword);
     if (payload._errors) {
       setErrors(payload);
+      return;
     }
 
     onRegisterComplete();
   };
+
+  if (loading) {
+    return <Spinner />;
+  }
 
   return (
     <form

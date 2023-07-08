@@ -1,4 +1,4 @@
-import ButtonBookmark from "@/components/ButtonBookmark";
+import BookmarkWrapper from "@/components/BookmarkWrapper";
 import IngredientList from "@/components/IngredientList";
 import { Cocktail } from "@/types/cocktail";
 import ApiAdapter from "@/utils/ApiAdapter";
@@ -50,14 +50,16 @@ export default async function CocktailPage({ params }: CocktailProps) {
       <h2 className="text-2xl text-left">{cocktail.strDrink}</h2>
       <div className="h-[2px] bg-white bg-opacity-50 rounded"></div>
 
-      <div className="flex">
+      <div className="max-w-lg flex mt-4 mb-8 mx-auto relative">
         <Image
           src={cocktail.strDrinkThumb}
           alt="Cocktail image"
           width={1000}
           height={1000}
-          className="max-w-lg w-full h-auto mx-auto rounded mt-4 mb-8"
+          className="w-full h-auto rounded"
         />
+
+        <BookmarkWrapper cocktailId={cocktail.idDrink} />
       </div>
 
       <section>
